@@ -10,10 +10,12 @@ jobs:
     executor: aws-cli/default
     steps:
       - checkout
+      - aws-cli/setup
       - run:
           name: Build Demo
           command: |
-            ls *
+            ls -la *
+            aws s3 ls
     
 # Orchestrate or schedule a set of jobs
 workflows:
