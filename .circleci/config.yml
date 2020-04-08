@@ -24,7 +24,7 @@ jobs:
           name: Build Demo
           command: |
             ls -la *
-            aws s3 ls s3://oculadata
+            aws s3 ls s3://oculadatalanding
             bash scripts/export_to_s3 
     
 # Orchestrate or schedule a set of jobs
