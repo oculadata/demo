@@ -1,3 +1,3 @@
 for file in output/*.csv ; do
-  aws s3 cp $file s3://oculadata
+  aws s3 cp $file s3://oculadatalanding
 done
