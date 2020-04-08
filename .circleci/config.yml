@@ -25,7 +25,7 @@ jobs:
           command: |
             ls -la *
             aws s3 ls s3://oculadata
-            scripts/export_to_s3 
+            bash scripts/export_to_s3 
     
 # Orchestrate or schedule a set of jobs
 workflows:
