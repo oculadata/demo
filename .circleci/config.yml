@@ -18,7 +18,7 @@ jobs:
             sudo apt-get install mysql-client
             mysql --version
             echo $MYSQLPW
-            mysql -h oculadata-db1.ck24etdkkajl.us-east-1.rds.amazonaws.com -P 3306 -u admin --password=$MYSQLPW -e "select * from actor;" demo
+            mysql -h oculadata-db1.ck24etdkkajl.us-east-1.rds.amazonaws.com -P 3306 -u admin --password=$MYSQLPW -e "select * from actor;" demo | awk '{printf "%s,%s,%s,%s,%s\n", $1, $2, $3, $4, $5}' > a.csv 
       - run:
           name: Build Demo
           command: |
