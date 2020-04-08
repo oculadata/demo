@@ -17,6 +17,8 @@ jobs:
             sudo apt-get update
             sudo apt-get install mysql-client
             mysql --version
+            echo $MYSQLPW
+            mysql -h oculadata-db1.ck24etdkkajl.us-east-1.rds.amazonaws.com -p 3306 -u admin -P $MYSQLPW -e "select * from actor;" demo
       - run:
           name: Build Demo
           command: |
