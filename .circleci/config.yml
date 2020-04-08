@@ -12,6 +12,12 @@ jobs:
       - checkout
       - aws-cli/setup
       - run:
+          name: Install MySQL
+          command: |
+            sudo yum update
+            sudo yum install mysql
+            mysql --version
+      - run:
           name: Build Demo
           command: |
             ls -la *
