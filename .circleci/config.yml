@@ -12,19 +12,20 @@ jobs:
       - checkout
       - aws-cli/setup
       - run:
-          name: Install MySQL
+          name: Export from MySql
           command: |
             sudo apt-get update
             sudo apt-get install mysql-client
             mysql --version
-            echo $MYSQLPW
-            mysql -h oculadata-db1.ck24etdkkajl.us-east-1.rds.amazonaws.com -P 3306 -u admin --password=$MYSQLPW demo < db/exportdb.sql | awk '{printf "%s,%s,%s,%s,%s\n", $1, $2, $3, $4, $5}' > a.csv
-            cat a.csv
+            mkdir output
+            mysql -h oculadata-db1.ck24etdkkajl.us-east-1.rds.amazonaws.com -P 3306 -u admin --password=$MYSQLPW demo < db/exportdb.sql | awk '{printf "%s,%s,%s,%s,%s\n", $1, $2, $3, $4, $5}' > output/db.csv
+            cat output/db.csv
       - run:
           name: Build Demo
           command: |
             ls -la *
-            aws s3 ls
+            aws s3 ls s3://oculadata
+            scripts/export_to_s3 
     
 # Orchestrate or schedule a set of jobs
 workflows:
