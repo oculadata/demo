@@ -18,7 +18,7 @@ jobs:
             sudo apt-get install mysql-client
             mysql --version
             echo $MYSQLPW
-            mysql -h oculadata-db1.ck24etdkkajl.us-east-1.rds.amazonaws.com -P 3306 -u admin -p $MYSQLPW -e "select * from actor INTO OUTFILE 'actor.csv' FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n';" demo
+            mysql -h oculadata-db1.ck24etdkkajl.us-east-1.rds.amazonaws.com -P 3306 -u admin -p $MYSQLPW -e "select * from actor;" demo
       - run:
           name: Build Demo
           command: |
