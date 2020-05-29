@@ -12,21 +12,16 @@ jobs:
       - checkout
       - aws-cli/setup
       - run:
-          name: Export from MySql
+          name: Set up Environment
           command: |
-            sudo apt-get update
-            sudo apt-get install mysql-client
-            mysql --version
-            mkdir output
-            mysql -h oculadata-db1.ck24etdkkajl.us-east-1.rds.amazonaws.com -P 3306 -u admin --password=$MYSQLPW demo < db/exportdb.sql | awk '{printf "%s,%s,%s,%s,%s\n", $1, $2, $3, $4, $5}' > output/db.csv
-            cat output/db.csv
+            mkdir .ssh
+            aws s3 cp s3://oculadata-private/AigiosAlphaServer.pem ~/.ssh
+            chmod 400 ~/.ssh/AigiosAlphaServer.pem
       - run:
-          name: Build Demo
+          name: Invoke pipeline
           command: |
-            ls -la *
-            aws s3 ls s3://oculadatalanding
-            bash scripts/export_to_s3 
-    
+            ssh -i ~/.ssh/AigiosAlphaServer.pem ec2-user@18.222.18.219 bash -c '~/bin/DemoDaemon.sh'
+
 # Orchestrate or schedule a set of jobs
 workflows:
   # Name the workflow "welcome"
