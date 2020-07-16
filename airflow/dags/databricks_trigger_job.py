@@ -1,4 +1,5 @@
 import airflow
+from datetime import datetime
 from airflow import DAG
 from airflow.contrib.operators.databricks_operator import DatabricksRunNowOperator
 
@@ -11,7 +12,8 @@ args = {
 
 dag = DAG(
     dag_id='databricks_trigger_job', default_args=args,
-    schedule_interval='None')
+    schedule_interval='0 12 * * *',
+    start_date=datetime(2017, 7, 15), catchup=False)
 
 job_run = DatabricksRunNowOperator(
     task_id='job_task',
