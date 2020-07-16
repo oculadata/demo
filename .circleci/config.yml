@@ -37,11 +37,16 @@ jobs:
           command: |
             ls .
             bash ./run.sh DemoDaemon Diabetes
+      - run:
+          name: Update Airflow DAGs
+          command: |
+            ls .
+            bash scripts/airflow_update.sh
 
 # Orchestrate or schedule a set of jobs
 workflows:
-  # Name the workflow "welcome"
-  welcome:
-    # Run the welcome/run job in its own container
+  # Name the workflow "demo_run"
+  demo_run:
+    # Run the demo/run job in its own container
     jobs:
       - build_test
