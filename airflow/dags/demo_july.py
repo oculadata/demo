@@ -10,7 +10,7 @@ def print_demo():
 
 dag = DAG('demo_july', description='Simple demo DAG',
           schedule_interval='0 12 * * *',
-          start_date=datetime(2017, 3, 20), catchup=False)
+          start_date=datetime(2017, 7, 15), catchup=False)
 
 dummy_operator = DummyOperator(task_id='first_task', retries=3, dag=dag)
 
