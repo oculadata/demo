@@ -18,10 +18,25 @@ jobs:
             aws s3 cp s3://oculadata-private/AigiosAlphaServer.pem ~/.ssh
             chmod 400 ~/.ssh/AigiosAlphaServer.pem
       - run:
-          name: Invoke pipeline
+          name: Invoke pipeline for ML1
           command: |
             ls .
-            bash ./run.sh DemoDaemon
+            bash ./run.sh DemoDaemon raw
+      - run:
+          name: Invoke pipeline for Covid19
+          command: |
+            ls .
+            bash ./run.sh DemoDaemon Covid19
+      - run:
+          name: Invoke pipeline for PanCanAtlas
+          command: |
+            ls .
+            bash ./run.sh DemoDaemon PanCanAtlas
+      - run:
+          name: Invoke pipeline for Diabetes
+          command: |
+            ls .
+            bash ./run.sh DemoDaemon Diabetes
 
 # Orchestrate or schedule a set of jobs
 workflows:
