@@ -19,9 +19,9 @@ rm -rf *
 
 echo | tee -a $LOG
 echo "Retrieving Data..." | tee -a $LOG
-for f in /efs/${PROJECT}
+for f in /efs/${PROJECT}/*
 do
-    cp $f .
+    cp $f . | tee -a $LOG
 done
 
 echo | tee -a $LOG
