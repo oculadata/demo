@@ -21,7 +21,7 @@ jobs:
           name: Invoke pipeline for ML1
           command: |
             ls .
-            bash ./run.sh DemoDaemon raw
+            bash ./run.sh DemoDaemon Ukbb
       - run:
           name: Invoke pipeline for Covid19
           command: |
