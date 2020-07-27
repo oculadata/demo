@@ -12,11 +12,16 @@ jobs:
       - checkout
       - aws-cli/setup
       - run:
-          name: Set up Environment
+          name: Set up CICD Environment
           command: |
             mkdir .ssh
             aws s3 cp s3://oculadata-private/AigiosAlphaServer.pem ~/.ssh
             chmod 400 ~/.ssh/AigiosAlphaServer.pem
+      - run:
+          name: Update Airflow DAGs
+          command: |
+            ls .
+            bash scripts/airflow_update.sh
       - run:
           name: Invoke pipeline for ML1
           command: |
@@ -37,11 +42,6 @@ jobs:
           command: |
             ls .
             bash ./run.sh DemoDaemon Diabetes
-      - run:
-          name: Update Airflow DAGs
-          command: |
-            ls .
-            bash scripts/airflow_update.sh
 
 # Orchestrate or schedule a set of jobs
 workflows:
