@@ -6,6 +6,7 @@ import pandas_datareader as pdr
 from pandas_datareader import data
 from datetime import datetime
 import os
+import functools
 
 
 def get_tiingo(symbol='pnqi'):
@@ -77,7 +78,7 @@ def main():
     dfs = list(map(yahoo, symbols))
     ff = famafrench()
     dfs.append(ff)
-    df = pd.concat(dfs)
+    df = functools.reduce(lambda a, b: a.join(b), dfs)
     print(df.head(5))
     print(df.columns)
     print(df.index.dtype)
