@@ -24,7 +24,7 @@ def get_tiingo(symbol='pnqi'):
     return df
 
 
-def yahoo(symbol, start='2004-01-01', end='2020-12-31'):
+def yahoo(symbol, start='2010-01-01', end='2020-12-31'):
     df = data.DataReader(symbol, start=start, end=end, data_source='yahoo')
     columnsmap = {c:(symbol+'_'+c).replace(' ', '_').replace('^', '') for c in df.columns}
     if df.any:
@@ -72,9 +72,12 @@ def famafrench(infile='F-F_Research_Data_5_Factors_2x3_daily.CSV'):
     # print(ff.info())
     return ff
 
+def test():
+    print(yahoo('VIX'))
+
 def main():
-    # PNQI, IXN, VGT, VIX, ^NDX, ^RUT, ^VXN
-    symbols = ['PNQI', 'IXN', 'VGT', 'VIX', '^NDX', '^RUT', '^VXN']
+    # PNQI, IXN, VGT, ^VIX, ^NDX, ^RUT, ^VXN
+    symbols = ['PNQI', 'IXN', 'VGT', '^VIX', '^NDX', '^RUT', '^VXN']
     dfs = list(map(yahoo, symbols))
     ff = famafrench()
     dfs.append(ff)
@@ -87,3 +90,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    # test()
